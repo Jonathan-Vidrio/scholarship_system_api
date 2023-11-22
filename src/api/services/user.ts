@@ -1,4 +1,4 @@
-import IUser from "../interfaces/user";
+import User from "../interfaces/user";
 import { PrismaClient } from "@prisma/client";
 import { encrypt } from "../../utils/bcryptHandler";
 
@@ -65,7 +65,7 @@ const getUserByEmail = async (email: string) => {
     return user;
 }
 
-const createUser = async (user: IUser) => {
+const createUser = async (user: User) => {
     const newUser = await prisma.user.create({
         data: {
             id: user.id || undefined,
@@ -80,7 +80,7 @@ const createUser = async (user: IUser) => {
     return newUser;
 }
 
-const updateUser = async (user: IUser) => {
+const updateUser = async (user: User) => {
     const updatedUser = await prisma.user.update({
         where: {
             id: user.id

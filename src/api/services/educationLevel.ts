@@ -1,4 +1,4 @@
-import IEducationLevel from "../interfaces/educationLevel";
+import EducationLevel from "../interfaces/educationLevel";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -21,7 +21,7 @@ const getEducationLevel = async (id: number) => {
     return educationLevel;
 }
 
-const createEducationLevel = async (educationLevel: IEducationLevel) => {
+const createEducationLevel = async (educationLevel: EducationLevel) => {
     const newEducationLevel = await prisma.educationLevel.createMany({
         data: {
             id: educationLevel.id || undefined,
@@ -35,7 +35,7 @@ const createEducationLevel = async (educationLevel: IEducationLevel) => {
     return newEducationLevel;
 }
 
-const updateEducationLevel = async (id: number, educationLevel: IEducationLevel) => {
+const updateEducationLevel = async (id: number, educationLevel: EducationLevel) => {
     const updatedEducationLevel = await prisma.educationLevel.update({
         where: {
             id: id

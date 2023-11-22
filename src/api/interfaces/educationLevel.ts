@@ -1,4 +1,4 @@
-interface IEducationLevel {
+interface EducationLevel {
     id?: number;
     name: string;
     description?: string;
@@ -7,4 +7,4 @@ interface IEducationLevel {
     updatedAt?: Date;
 }
 
-export default IEducationLevel;
+export default EducationLevel;

@@ -1,4 +1,4 @@
-interface ITutor {
+interface Tutor {
     id?: number;
     workerId: string;
     name: string;
@@ -10,4 +10,4 @@ interface ITutor {
     updatedAt?: Date;
 }
 
-export default ITutor;
+export default Tutor;

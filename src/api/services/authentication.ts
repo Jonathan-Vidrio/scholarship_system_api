@@ -1,9 +1,9 @@
-import IUser from "../interfaces/user";
+import User from "../interfaces/user";
 import { getUserByEmail } from "./user"
 import { verify } from "../../utils/bcryptHandler";
 import { generateToken, verifyToken } from "../../utils/jwtHandler";
 
-const login = async (user: IUser) => {
+const login = async (user: User) => {
     const { email, password } = user;
     const userFound = await getUserByEmail(email);
     if (userFound) {

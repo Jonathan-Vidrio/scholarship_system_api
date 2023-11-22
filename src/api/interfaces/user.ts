@@ -1,4 +1,4 @@
-interface IUser {
+interface User {
     id?: number;
     email: string;
     password: string;
@@ -8,4 +8,4 @@ interface IUser {
     updatedAt?: Date;
 }
 
-export default IUser;
+export default User;

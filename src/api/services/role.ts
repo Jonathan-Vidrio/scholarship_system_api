@@ -1,4 +1,4 @@
-import IRole from "../interfaces/role";
+import Role from "../interfaces/role";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -12,7 +12,7 @@ const getRoles = async () => {
     return roles;
 }
 
-const createRole = async (role: IRole) => {
+const createRole = async (role: Role) => {
     const newRole = await prisma.role.create({
         data: {
             id: role.id || undefined,

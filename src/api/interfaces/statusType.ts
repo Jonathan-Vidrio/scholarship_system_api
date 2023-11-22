@@ -1,4 +1,4 @@
-interface IStatusType {
+interface StatusType {
     id?: number;
     name: string;
     description?: string;
@@ -6,4 +6,4 @@ interface IStatusType {
     updatedAt?: Date;
 }
 
-export default IStatusType;
+export default StatusType;

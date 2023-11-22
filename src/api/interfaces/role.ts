@@ -1,4 +1,4 @@
-interface IRole {
+interface Role {
     id?: number;
     name: string;
     description?: string;
@@ -7,4 +7,4 @@ interface IRole {
     updatedAt?: Date;
 }
 
-export default IRole;
+export default Role;

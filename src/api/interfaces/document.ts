@@ -1,4 +1,4 @@
-interface IDocument {
+interface Document {
     id?: number;
     scholarId: number;
     typeId: number;
@@ -9,4 +9,4 @@ interface IDocument {
     updatedAt?: Date;
 }
 
-export default IDocument;
+export default Document;

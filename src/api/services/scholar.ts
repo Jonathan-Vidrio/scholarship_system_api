@@ -1,4 +1,4 @@
-import IScholar from "../interfaces/scholar";
+import Scholar from "../interfaces/scholar";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -83,7 +83,7 @@ const getScholarByCurp = async (curp: string) => {
     return scholar;
 }
 
-const createScholar = async (scholar: IScholar) => {
+const createScholar = async (scholar: Scholar) => {
     const newScholar = await prisma.scholar.create({
         data: {
             id: scholar.id || undefined,
@@ -104,7 +104,7 @@ const createScholar = async (scholar: IScholar) => {
     return newScholar;
 }
 
-const updateScholar = async (id: number, scholar: IScholar) => {
+const updateScholar = async (id: number, scholar: Scholar) => {
     const updatedScholar = await prisma.scholar.update({
         where: {
             id: id

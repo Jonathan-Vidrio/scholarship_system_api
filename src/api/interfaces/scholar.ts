@@ -1,4 +1,4 @@
-interface IScholar {
+interface Scholar {
     id?: number;
     userId?: number;
     tutorId: number;
@@ -14,4 +14,4 @@ interface IScholar {
     updatedAt?: Date;
 }
 
-export default IScholar;
+export default Scholar;

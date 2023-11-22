@@ -1,4 +1,4 @@
-interface IScholarship {
+interface Scholarship {
     id?: number;
     name: string;
     description?: string;
@@ -8,4 +8,4 @@ interface IScholarship {
     updatedAt?: Date;
 }
 
-export default IScholarship;
+export default Scholarship;

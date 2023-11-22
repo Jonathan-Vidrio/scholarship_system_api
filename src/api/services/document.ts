@@ -1,4 +1,4 @@
-import IDocument from "../interfaces/document";
+import Document from "../interfaces/document";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -49,7 +49,7 @@ const getDocumentById = async (id: number) => {
     return document;
 }
 
-const createDocument = async (document: IDocument) => {
+const createDocument = async (document: Document) => {
     const newDocument = await prisma.document.create({
         data: {
             id: document.id || undefined,
@@ -65,7 +65,7 @@ const createDocument = async (document: IDocument) => {
     return newDocument;
 }
 
-const updateDocument = async (id: number, document: IDocument) => {
+const updateDocument = async (id: number, document: Document) => {
     const updatedDocument = await prisma.document.update({
         where: {
             id: id

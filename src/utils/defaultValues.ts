@@ -1,9 +1,9 @@
-import IStatusType from "../api/interfaces/statusType";
-import IUser from "../api/interfaces/user";
-import IRole from "../api/interfaces/role";
-import IEducationLevel from "../api/interfaces/educationLevel";
+import StatusType from "../api/interfaces/statusType";
+import User from "../api/interfaces/user";
+import Role from "../api/interfaces/role";
+import EducationLevel from "../api/interfaces/educationLevel";
 
-const statusTypes : IStatusType[] = [
+const statusTypes : StatusType[] = [
     {
         id: 0,
         name: "disabled",
@@ -19,7 +19,7 @@ const statusTypes : IStatusType[] = [
     },
 ];
 
-const roles: IRole[] = [
+const roles: Role[] = [
     {
         name: "superAdmin",
         description: "Super Administrator"
@@ -34,7 +34,7 @@ const roles: IRole[] = [
     },
 ];
 
-const users: IUser[] = [
+const users: User[] = [
     {
         email: "superadmin@gmail.com",
         password: "123456",
@@ -43,7 +43,7 @@ const users: IUser[] = [
     }
 ];
 
-const educationLevels: IEducationLevel[] = [
+const educationLevels: EducationLevel[] = [
     {
         name: "primary",
         description: "Primary",

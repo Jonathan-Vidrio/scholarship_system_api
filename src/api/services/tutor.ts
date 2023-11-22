@@ -1,4 +1,4 @@
-import ITutor from "../interfaces/tutor";
+import Tutor from "../interfaces/tutor";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -70,7 +70,7 @@ const getTutorByWorkerId = async (workerId: string) => {
     return tutor;
 }
 
-const createTutor = async (tutor: ITutor) => {
+const createTutor = async (tutor: Tutor) => {
     const newTutor = await prisma.tutor.create({
         data: {
             id: tutor.id || undefined,
@@ -87,7 +87,7 @@ const createTutor = async (tutor: ITutor) => {
     return newTutor;
 }
 
-const updateTutor = async (id: number, tutor: ITutor) => {
+const updateTutor = async (id: number, tutor: Tutor) => {
     const updatedTutor = await prisma.tutor.update({
         where: {
             id
