@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import router from "./api/routes/index";
+import router from "./api/routes";
 import errorHandler from "./api/middlewares/errorHandler";
 
 import initialSetUp from "./api/libs/initialSetUp";

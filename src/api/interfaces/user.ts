@@ -3,7 +3,7 @@ interface IUser {
     email: string;
     password: string;
     roleId?: number;
-    status?: number;
+    statusId?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

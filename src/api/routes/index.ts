@@ -1,15 +1,20 @@
-import { Router } from 'express';
-import { readdirSync } from 'fs';
+import { Router } from "express";
+import { readdirSync } from "fs";
 
 const PATH_ROUTER = `${__dirname}`;
 const router = Router();
 
-readdirSync(PATH_ROUTER).forEach((file) => {
-    const fileName = file.split('.')[0];
-    if (fileName !== 'index') {
-        console.log(`Loading route: ${fileName}`);
-        router.use(`/${fileName}`, require(`./${fileName}`).default);
+const loadRoutes = async () => {
+    const routeFiles = readdirSync(PATH_ROUTER).filter(file => file !== 'index.ts');
+
+    for (const file of routeFiles) {
+        const fileName = file.split('.')[0];
+        const module = await import(`./${fileName}`);
+        router.use(`/${fileName}`, module.default);
+        console.log(`Route ${fileName} loaded in localhost:3000/api/${fileName}`);
     }
-});
+}
+
+loadRoutes().catch(console.error);
 
 export default router;

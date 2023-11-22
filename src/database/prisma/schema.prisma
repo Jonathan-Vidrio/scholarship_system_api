@@ -8,90 +8,125 @@ datasource db {
 }
 
 model role {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
   description String?
-  status      Int      @default(1)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  statusId    Int        @default(1)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  status      statusType @relation(fields: [statusId], references: [id])
   users       user[]
 }
 
 model user {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   password  String
-  roleId    Int       @default(3)
-  status    Int       @default(1)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  role      role?     @relation(fields: [roleId], references: [id])
+  roleId    Int        @default(3)
+  statusId  Int        @default(1)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  role      role?      @relation(fields: [roleId], references: [id])
+  status    statusType @relation(fields: [statusId], references: [id])
   scholar   scholar[]
 }
 
 model tutor {
-  id             Int       @id @default(autoincrement())
-  workerId       String    @unique
+  id             Int        @id @default(autoincrement())
+  workerId       String     @unique
   name           String
   firstLastName  String
   secondLastName String?
   curp           String
-  status         Int       @default(1)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  statusId       Int        @default(1)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  status         statusType @relation(fields: [statusId], references: [id])
   scholar        scholar[]
 }
 
 model educationLevel {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
   description String?
-  status      Int       @default(1)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  statusId    Int        @default(1)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  status      statusType @relation(fields: [statusId], references: [id])
   scholar     scholar[]
 }
 
 model scholarship {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
   description String?
   amount      Float
-  status      Int       @default(1)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  statusId    Int        @default(1)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  status      statusType @relation(fields: [statusId], references: [id])
   scholar     scholar[]
 }
 
 model scholar {
   id               Int             @id @default(autoincrement())
-  userId           Int
+  userId           Int?            @unique
   tutorId          Int             @unique
-  name             String
-  firstLastName    String
+  name             String?
+  firstLastName    String?
   secondLastName   String?
   curp             String
-  birthdate        DateTime
+  birthdate        DateTime?
   educationLevelId Int?
   scholarshipId    Int?
-  status           Int             @default(1)
+  statusId         Int             @default(2)
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
-  user             user            @relation(fields: [userId], references: [id])
+  user             user?           @relation(fields: [userId], references: [id])
   tutor            tutor           @relation(fields: [tutorId], references: [id])
   educationLevel   educationLevel? @relation(fields: [educationLevelId], references: [id])
   scholarship      scholarship?    @relation(fields: [scholarshipId], references: [id])
+  status           statusType      @relation(fields: [statusId], references: [id])
   document         document[]
 }
 
 model document {
-  id        Int      @id @default(autoincrement())
+  id        Int          @id @default(autoincrement())
   scholarId Int
-  type      Int
-  saved     DateTime @default(now())
+  typeId    Int
+  saved     DateTime     @default(now())
   url       String
-  status    Int      @default(1)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  scholar   scholar  @relation(fields: [scholarId], references: [id])
+  statusId  Int          @default(2)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  scholar   scholar      @relation(fields: [scholarId], references: [id])
+  type      documentType @relation(fields: [typeId], references: [id])
+  status    statusType   @relation(fields: [statusId], references: [id])
+}
+
+model documentType {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String?
+  statusId    Int        @default(1)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  status      statusType @relation(fields: [statusId], references: [id])
+  document    document[]
+}
+
+model statusType {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  description    String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  role           role[]
+  user           user[]
+  tutor          tutor[]
+  educationLevel educationLevel[]
+  scholarship    scholarship[]
+  scholar        scholar[]
+  document       document[]
+  documentType   documentType[]
 }

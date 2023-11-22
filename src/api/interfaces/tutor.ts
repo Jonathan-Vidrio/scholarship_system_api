@@ -1,11 +1,11 @@
 interface ITutor {
     id?: number;
-    workerId: number;
+    workerId: string;
     name: string;
-    firsLastName: string;
+    firstLastName: string;
     secondLastName?: string;
     curp: string;
-    status?: number;
+    statusId?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

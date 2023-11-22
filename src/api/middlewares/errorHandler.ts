@@ -36,6 +36,32 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
     } else if (err instanceof PrismaClientValidationError) {
         statusCode = 400;
         message = `Invalid value for argument: ${argument}`;
+
+    } else if (err instanceof Error) {
+        switch (err.message) {
+            case "Password does not match":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "User not found":
+                statusCode = 404;
+                message = err.message;
+                break;
+            case "Unauthorized":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "jwt must be provided":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "jwt expired":
+                statusCode = 401;
+                message = err.message;
+            default:
+                message = err.message;
+                break;
+        }
     }
 
     res.status(statusCode).json({ message });

@@ -4,7 +4,8 @@ import IUser from "../api/interfaces/user";
 
 const generateToken = (user: IUser) => {
     const token = sign(user, SECRET, {
-        expiresIn: 86400
+        // expiresIn: 1h
+        expiresIn: 60 * 60 * 24
     });
     return token;
 }

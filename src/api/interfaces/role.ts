@@ -2,7 +2,7 @@ interface IRole {
     id?: number;
     name: string;
     description?: string;
-    status?: number;
+    statusId?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

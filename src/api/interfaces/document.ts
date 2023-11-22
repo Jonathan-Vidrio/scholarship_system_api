@@ -1,10 +1,10 @@
 interface IDocument {
     id?: number;
     scholarId: number;
-    type: number;
+    typeId: number;
     saved?: Date;
     url: string;
-    status?: number;
+    statusId?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

@@ -5,17 +5,55 @@ import { encrypt } from "../../utils/bcryptHandler";
 const prisma = new PrismaClient();
 
 const getUsers = async () => {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+        where: {
+            statusId: 1
+        }
+    });
+    return users;
+}
+
+const getUsersByRole = async (roleId: number) => {
+    const users = await prisma.user.findMany({
+        where: {
+            roleId: roleId
+        }
+    });
+    return users;
+}
+
+const getUsersByFilter = async (filter: string) => {
+    const users = await prisma.user.findMany({
+        where: {
+            OR: [
+                {
+                    email: {
+                        contains: filter
+                    }
+                }
+            ],
+            statusId: 1
+        }
+    });
     return users;
 }
 
 const getDisabledUsers = async () => {
     const users = await prisma.user.findMany({
         where: {
-            status: 0
+            statusId: 0
         }
     });
     return users;
+}
+
+const getUserById = async (id: number) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            id: id
+        }
+    });
+    return user;
 }
 
 const getUserByEmail = async (email: string) => {
@@ -34,7 +72,7 @@ const createUser = async (user: IUser) => {
             email: user.email,
             password: await encrypt(user.password),
             roleId: user.roleId || undefined,
-            status: user.status || undefined,
+            statusId: user.statusId || undefined,
             createdAt: user.createdAt || undefined,
             updatedAt: user.updatedAt || undefined
         }
@@ -62,7 +100,7 @@ const enableUser = async (id: number) => {
             id: id
         },
         data: {
-            status: 1
+            statusId: 1
         }
     });
     return enabledUser;
@@ -74,7 +112,7 @@ const disableUser = async (id: number) => {
             id: id
         },
         data: {
-            status: 0
+            statusId: 0
         }
     });
     return disabledUser;
@@ -91,7 +129,10 @@ const deleteUser = async (id: number) => {
 
 export {
     getUsers,
+    getUsersByRole,
+    getUsersByFilter,
     getDisabledUsers,
+    getUserById,
     getUserByEmail,
     createUser,
     updateUser,

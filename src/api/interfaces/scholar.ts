@@ -1,15 +1,15 @@
 interface IScholar {
     id?: number;
-    userId: number;
+    userId?: number;
     tutorId: number;
-    name: string;
-    firstLastName: string;
+    name?: string;
+    firstLastName?: string;
     secondLastName?: string;
     curp: string;
-    birthDate: Date;
-    educationLevelId: number;
-    scholarshipId: number;
-    status?: number;
+    birthDate?: Date;
+    educationLevelId?: number;
+    scholarshipId?: number;
+    statusId?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

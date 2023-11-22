@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const getDocuments = async () => {
     const documents = await prisma.document.findMany({
         where: {
-            status: 1
+            statusId: 1
         }
     });
     return documents;
@@ -15,34 +15,26 @@ const getDocuments = async () => {
 const getDisabledDocuments = async () => {
     const documents = await prisma.document.findMany({
         where: {
-            status: 0
+            statusId: 0
         }
     });
     return documents;
 }
 
-const getDocumentsByScholarId = async (scholarId: number) => {
+const getByFilter = async (filter: string) => {
     const documents = await prisma.document.findMany({
         where: {
-            scholarId: scholarId
-        }
-    });
-    return documents;
-}
-
-const getDocumentsByType = async (type: number) => {
-    const documents = await prisma.document.findMany({
-        where: {
-            type: type
-        }
-    });
-    return documents;
-}
-
-const getDocumentsBySaved = async (saved: Date) => {
-    const documents = await prisma.document.findMany({
-        where: {
-            saved: saved
+            OR: [
+                {
+                    scholarId: Number(filter)
+                },
+                {
+                    typeId: Number(filter)
+                },
+                {
+                    statusId: Number(filter)
+                }
+            ]
         }
     });
     return documents;
@@ -62,10 +54,10 @@ const createDocument = async (document: IDocument) => {
         data: {
             id: document.id || undefined,
             scholarId: document.scholarId,
-            type: document.type,
+            typeId: document.typeId,
             saved: document.saved || undefined,
             url: document.url,
-            status: document.status || undefined,
+            statusId: document.statusId || undefined,
             createdAt: document.createdAt || undefined,
             updatedAt: document.updatedAt || undefined
         }
@@ -73,10 +65,10 @@ const createDocument = async (document: IDocument) => {
     return newDocument;
 }
 
-const updateDocument = async (document: IDocument) => {
+const updateDocument = async (id: number, document: IDocument) => {
     const updatedDocument = await prisma.document.update({
         where: {
-            id: document.id
+            id: id
         },
         data: document
     });
@@ -89,7 +81,7 @@ const enableDocument = async (id: number) => {
             id: id
         },
         data: {
-            status: 1
+            statusId: 1
         }
     });
     return enabledDocument;
@@ -101,7 +93,7 @@ const disableDocument = async (id: number) => {
             id: id
         },
         data: {
-            status: 0
+            statusId: 0
         }
     });
     return disabledDocument;
@@ -114,18 +106,4 @@ const deleteDocument = async (id: number) => {
         }
     });
     return deletedDocument;
-}
-
-export {
-    getDocuments,
-    getDisabledDocuments,
-    getDocumentsByScholarId,
-    getDocumentsByType,
-    getDocumentsBySaved,
-    getDocumentById,
-    createDocument,
-    updateDocument,
-    enableDocument,
-    disableDocument,
-    deleteDocument
 }
