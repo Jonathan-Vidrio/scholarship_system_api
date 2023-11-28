@@ -56,6 +56,16 @@ const getScholarsByTutorId = async (tutorId: number) => {
     return scholar;
 }
 
+const getScholarByTutorIdAndCurp = async (tutorId: number, curp: string) => {
+    const scholar = await prisma.scholar.findMany({
+        where: {
+            tutorId: tutorId,
+            curp: curp
+        }
+    });
+    return scholar;
+}
+
 const getScholar = async (id: number) => {
     const scholar = await prisma.scholar.findUnique({
         where: {
@@ -152,6 +162,7 @@ export {
     getDisabledScholars,
     getScholarByFilter,
     getScholarsByTutorId,
+    getScholarByTutorIdAndCurp,
     getScholar,
     getScholarByUserId,
     getScholarByCurp,

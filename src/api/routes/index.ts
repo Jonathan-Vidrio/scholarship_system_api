@@ -5,12 +5,13 @@ const PATH_ROUTER = `${__dirname}`;
 const router = Router();
 
 const loadRoutes = async () => {
-    const routeFiles = readdirSync(PATH_ROUTER).filter(file => file !== 'index.ts');
+    const routeFiles = readdirSync(PATH_ROUTER);
 
     for (const file of routeFiles) {
         const fileName = file.split('.')[0];
-        const module = await import(`./${fileName}`);
-        router.use(`/${fileName}`, module.default);
+        if (fileName === 'index') continue;
+        const route = require(`${PATH_ROUTER}/${file}`);
+        router.use(`/${fileName}`, route.default);
         console.log(`Route ${fileName} loaded in localhost:3000/api/${fileName}`);
     }
 }
