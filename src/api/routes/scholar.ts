@@ -1,28 +1,29 @@
 import { Router } from "express";
 import * as ScholarController from "../controllers/scholar";
+import {isAdmin, isSession} from "../middlewares/session";
 
 const router = Router();
 
-router.get("/", ScholarController.getAll);
+router.get("/", isAdmin, ScholarController.getAll);
 
-router.get("/disabled", ScholarController.getDisabled);
+router.get("/disabled", isAdmin, ScholarController.getDisabled);
 
-router.get("/filter/:filter", ScholarController.getByFilter);
+router.get("/filter/:filter", isAdmin, ScholarController.getByFilter);
 
-router.get("/tutor/:id", ScholarController.getByTutorId);
+router.get("/tutor/:id", isAdmin, ScholarController.getByTutorId);
 
-router.get("/:id", ScholarController.getById);
+router.get("/:id", isSession, ScholarController.getById);
 
-router.get("/user/:userId", ScholarController.getByUserId);
+router.get("/user/:userId", isSession, ScholarController.getByUserId);
 
-router.post("/", ScholarController.post);
+router.post("/", isAdmin, ScholarController.post);
 
-router.put("/:id", ScholarController.put);
+router.put("/:id", isSession, ScholarController.put);
 
-router.delete("/disable/:id", ScholarController.disable);
+router.delete("/disable/:id", isAdmin, ScholarController.disable);
 
-router.patch("/enable/:id", ScholarController.enable);
+router.patch("/enable/:id", isAdmin, ScholarController.enable);
 
-router.delete("/:id", ScholarController.remove);
+router.delete("/:id", isAdmin, ScholarController.remove);
 
 export default router;

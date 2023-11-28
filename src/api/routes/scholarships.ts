@@ -1,24 +1,25 @@
 import { Router } from "express";
 import * as ScholarshipController from "../controllers/scholarship";
+import { isAdmin, isSession } from "../middlewares/session";
 
 const router = Router();
 
-router.get("/", ScholarshipController.getAll);
+router.get("/", isAdmin, ScholarshipController.getAll);
 
-router.get("/disabled", ScholarshipController.getDisabled);
+router.get("/disabled", isAdmin, ScholarshipController.getDisabled);
 
-router.get("/filter/:filter", ScholarshipController.getByFilter);
+router.get("/filter/:filter", isSession, ScholarshipController.getByFilter);
 
-router.get("/:id", ScholarshipController.getById);
+router.get("/:id", isSession, ScholarshipController.getById);
 
-router.post("/", ScholarshipController.post);
+router.post("/", isAdmin, ScholarshipController.post);
 
-router.put("/:id", ScholarshipController.put);
+router.put("/:id", isAdmin, ScholarshipController.put);
 
-router.delete("/disable/:id", ScholarshipController.disable);
+router.delete("/disable/:id", isAdmin, ScholarshipController.disable);
 
-router.patch("/enable/:id", ScholarshipController.enable);
+router.patch("/enable/:id", isAdmin, ScholarshipController.enable);
 
-router.delete("/:id", ScholarshipController.remove);
+router.delete("/:id", isAdmin, ScholarshipController.remove);
 
 export default router;

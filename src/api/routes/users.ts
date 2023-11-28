@@ -1,28 +1,29 @@
 import { Router } from 'express';
 import * as userController from '../controllers/user';
+import { isAdmin, isSession } from "../middlewares/session";
 
 const router = Router();
 
-router.get("/", userController.getAll);
+router.get("/", isAdmin, userController.getAll);
 
-router.get("/role/:roleId", userController.getByRole);
+router.get("/role/:roleId", isAdmin, userController.getByRole);
 
-router.get("/filter/:filter", userController.getByFilter);
+router.get("/filter/:filter", isAdmin, userController.getByFilter);
 
-router.get("/disabled", userController.getDisabled);
+router.get("/disabled", isAdmin, userController.getDisabled);
 
-router.get("/:id", userController.getById);
+router.get("/:id", isSession, userController.getById);
 
-router.get("/email/:email", userController.getByEmail);
+router.get("/email/:email", isSession, userController.getByEmail);
 
-router.post("/", userController.post);
+router.post("/", isAdmin, userController.post);
 
-router.put("/", userController.put);
+router.put("/", isSession, userController.put);
 
-router.delete("/disable/:id", userController.disable);
+router.delete("/disable/:id", isAdmin, userController.disable);
 
-router.patch("/enable/:id", userController.enable);
+router.patch("/enable/:id", isAdmin, userController.enable);
 
-router.delete("/:id", userController.remove);
+router.delete("/:id", isAdmin, userController.remove);
 
 export default router;
