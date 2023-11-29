@@ -11,7 +11,7 @@ const login = async (user: User) => {
         if (passwordMatch) {
             const token = generateToken(userFound);
             const data = {
-                user: userFound.roleId,
+                role: userFound.roleId,
                 token: token
             }
             return data;
@@ -27,7 +27,7 @@ const register = async (user: User) => {
     const userCreated = await createUser(user);
     const token = generateToken(userCreated);
     const data = {
-        user: userCreated.roleId,
+        role: userCreated.roleId,
         token: token
     }
     return data;
