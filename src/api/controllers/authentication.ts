@@ -1,13 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { login } from "../services/authentication";
-import { createUser } from "../services/user";
+import {login, register} from "../services/authentication";
 import { getScholarByTutorWorkerIdAndCurp } from "../services/scholar";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = req.body;
-        const userCreated = await createUser(user);
-        res.status(201).json({ user: userCreated });
+        const token = await register(user);
+        res.status(201).json({ token: token });
     } catch (error) {
         next(error);
     }
