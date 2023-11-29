@@ -50,6 +50,16 @@ const getByWorkerId = async (req: Request, res: Response, next: NextFunction) =>
     }
 }
 
+const getByCurp = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { curp } = req.params;
+        const tutor = await tutorService.getTutorByCurp(curp);
+        res.status(200).json(tutor);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const post = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { body } = req;
@@ -107,6 +117,7 @@ export {
     getDisabled,
     getById,
     getByWorkerId,
+    getByCurp,
     post,
     put,
     enable,

@@ -37,7 +37,7 @@ model tutor {
   name           String
   firstLastName  String
   secondLastName String?
-  curp           String
+  curp           String     @unique
   statusId       Int        @default(1)
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt

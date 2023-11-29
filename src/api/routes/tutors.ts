@@ -14,6 +14,8 @@ router.get("/:id", isAdmin, tutorController.getById);
 
 router.get("/worker/:workerId", isSession, tutorController.getByWorkerId);
 
+router.get("/curp/:curp", isSession, tutorController.getByCurp);
+
 router.post("/", isAdmin, tutorController.post);
 
 router.put("/:id", isAdmin, tutorController.put);

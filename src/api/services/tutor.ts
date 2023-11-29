@@ -70,6 +70,16 @@ const getTutorByWorkerId = async (workerId: string) => {
     return tutor;
 }
 
+const getTutorByCurp = async (curp: string) => {
+    const tutor = await prisma.tutor.findMany({
+        where: {
+            curp: curp
+        }
+    });
+    return tutor;
+
+}
+
 const createTutor = async (tutor: Tutor) => {
     const newTutor = await prisma.tutor.create({
         data: {
@@ -145,6 +155,7 @@ export {
     getDisabledTutors,
     getTutorById,
     getTutorByWorkerId,
+    getTutorByCurp,
     createTutor,
     updateTutor,
     enableTutor,
