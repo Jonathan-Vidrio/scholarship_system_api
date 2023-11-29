@@ -5,8 +5,8 @@ import { getScholarByTutorWorkerIdAndCurp } from "../services/scholar";
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = req.body;
-        const token = await register(user);
-        res.status(201).json({ token: token });
+        const data = await register(user);
+        res.status(201).json({ data: data });
     } catch (error) {
         next(error);
     }
@@ -15,8 +15,8 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
 const signIn = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = req.body;
-        const token = await login(user);
-        res.status(200).json({ token: token });
+        const data = await login(user);
+        res.status(200).json({ data: data });
     } catch (error) {
         next(error);
     }
