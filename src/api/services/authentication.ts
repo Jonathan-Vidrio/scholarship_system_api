@@ -10,7 +10,11 @@ const login = async (user: User) => {
         const passwordMatch = await verify(password, userFound.password);
         if (passwordMatch) {
             const token = generateToken(userFound);
-            return token;
+            const data = {
+                user: userFound.roleId,
+                token: token
+            }
+            return data;
         } else {
             throw new Error("Password does not match");
         }
@@ -22,7 +26,11 @@ const login = async (user: User) => {
 const register = async (user: User) => {
     const userCreated = await createUser(user);
     const token = generateToken(userCreated);
-    return token;
+    const data = {
+        user: userCreated.roleId,
+        token: token
+    }
+    return data;
 }
 
 export {
