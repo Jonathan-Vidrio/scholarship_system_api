@@ -1,5 +1,6 @@
 import Scholar from "../interfaces/scholar";
 import { PrismaClient } from "@prisma/client";
+import {getTutorByWorkerId} from "./tutor";
 
 const prisma = new PrismaClient();
 
@@ -56,14 +57,23 @@ const getScholarsByTutorId = async (tutorId: number) => {
     return scholar;
 }
 
-const getScholarByTutorIdAndCurp = async (tutorId: number, curp: string) => {
-    const scholar = await prisma.scholar.findMany({
-        where: {
-            tutorId: tutorId,
-            curp: curp
+const getScholarByTutorWorkerIdAndCurp = async (workerId: string, curp: string) => {
+    const tutor = await getTutorByWorkerId(workerId);
+    console.log(tutor);
+    if (tutor) {
+        const scholar = await prisma.scholar.findMany({
+            where: {
+                tutorId: tutor.id,
+                curp: curp
+            }
+        });
+
+        if (scholar.length > 0) {
+            return scholar;
         }
-    });
-    return scholar;
+        throw new Error("Scholar not found");
+    }
+    throw new Error("Tutor not found");
 }
 
 const getScholar = async (id: number) => {
@@ -162,7 +172,7 @@ export {
     getDisabledScholars,
     getScholarByFilter,
     getScholarsByTutorId,
-    getScholarByTutorIdAndCurp,
+    getScholarByTutorWorkerIdAndCurp,
     getScholar,
     getScholarByUserId,
     getScholarByCurp,

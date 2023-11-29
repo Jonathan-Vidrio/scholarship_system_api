@@ -7,6 +7,6 @@ router.post("/sign_up", authenticationController.signUp);
 
 router.post("/sign_in", authenticationController.signIn);
 
-router.get("/verify_scholar/", authenticationController.verifyScholar);
+router.post("/verify_scholar", authenticationController.verifyScholar);
 
 export default router;

@@ -47,6 +47,50 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
                 statusCode = 404;
                 message = err.message;
                 break;
+            case "Tutor not found":
+                statusCode = 404;
+                message = err.message;
+                break;
+            case "Scholar not found":
+                statusCode = 404;
+                message = err.message;
+                break;
+            case "User already exists":
+                statusCode = 409;
+                message = err.message;
+                break;
+            case "Tutor already exists":
+                statusCode = 409;
+                message = err.message;
+                break;
+            case "Scholar already exists":
+                statusCode = 409;
+                message = err.message;
+                break;
+            case "Worker not found":
+                statusCode = 404;
+                message = err.message;
+                break;
+            case "Worker already exists":
+                statusCode = 409;
+                message = err.message;
+                break;
+            case "User is not a tutor":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "User is not a scholar":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "User is not an admin":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "User is not a worker":
+                statusCode = 401;
+                message = err.message;
+                break;
             case "Unauthorized":
                 statusCode = 401;
                 message = err.message;
@@ -58,6 +102,19 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
             case "jwt expired":
                 statusCode = 401;
                 message = err.message;
+                break;
+            case "jwt malformed":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "jwt signature is required":
+                statusCode = 401;
+                message = err.message;
+                break;
+            case "jwt invalid":
+                statusCode = 401;
+                message = err.message;
+                break;
             default:
                 message = err.message;
                 break;

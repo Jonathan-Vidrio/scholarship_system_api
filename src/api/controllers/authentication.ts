@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { login } from "../services/authentication";
 import { createUser } from "../services/user";
-import { getScholarByTutorIdAndCurp } from "../services/scholar";
+import { getScholarByTutorWorkerIdAndCurp } from "../services/scholar";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -25,9 +25,8 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
 
 const verifyScholar = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const tutorId = req.params.tutorId;
-        const curp = req.params.curp;
-        const scholar = await getScholarByTutorIdAndCurp(parseInt(tutorId), curp);
+        const { workerId, curp } = req.body;
+        const scholar = await getScholarByTutorWorkerIdAndCurp(workerId, curp);
         res.status(200).json({ scholar: scholar });
     } catch (error) {
         next(error);
