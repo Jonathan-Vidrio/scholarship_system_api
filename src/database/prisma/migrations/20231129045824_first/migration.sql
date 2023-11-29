@@ -129,6 +129,9 @@ CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 CREATE UNIQUE INDEX "tutor_workerId_key" ON "tutor"("workerId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "tutor_curp_key" ON "tutor"("curp");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "educationLevel_name_key" ON "educationLevel"("name");
 
 -- CreateIndex
