@@ -26,7 +26,7 @@ const verifyScholar = async (req: Request, res: Response, next: NextFunction) =>
     try {
         const { workerId, curp } = req.body;
         const scholar = await getScholarByTutorWorkerIdAndCurp(workerId, curp);
-        res.status(200).json({ scholar: scholar });
+        res.status(200).json({ data: scholar });
     } catch (error) {
         next(error);
     }
