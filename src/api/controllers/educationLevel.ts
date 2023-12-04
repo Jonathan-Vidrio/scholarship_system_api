@@ -4,7 +4,7 @@ import * as educationLevelService from "../services/educationLevel";
 const getEducationLevels = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const educationLevels = await educationLevelService.getEducationLevels();
-        res.status(200).json(educationLevels);
+        res.status(200).json({ data: educationLevels });
     } catch (error) {
         next(error);
     }
@@ -14,7 +14,7 @@ const getEducationLevel = async (req: Request, res: Response, next: NextFunction
     try {
         const { id } = req.params;
         const educationLevel = await educationLevelService.getEducationLevel(Number(id));
-        res.status(200).json(educationLevel);
+        res.status(200).json({ data: educationLevel });
     } catch (error) {
         next(error);
     }
@@ -24,7 +24,7 @@ const postEducationLevel = async (req: Request, res: Response, next: NextFunctio
     try {
         const { body } = req;
         const educationLevel = await educationLevelService.createEducationLevel(body);
-        res.status(201).json(educationLevel);
+        res.status(201).json({ data: educationLevel });
     } catch (error) {
         next(error);
     }
@@ -35,7 +35,7 @@ const putEducationLevel = async (req: Request, res: Response, next: NextFunction
         const { id } = req.params;
         const { body } = req;
         const educationLevel = await educationLevelService.updateEducationLevel(Number(id), body);
-        res.status(200).json(educationLevel);
+        res.status(200).json({ data: educationLevel });
     } catch (error) {
         next(error);
     }
